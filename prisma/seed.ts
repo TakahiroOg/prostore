@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma } from "@/lib/generated/prisma/client";
+import { PrismaClient } from "@/lib/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import "dotenv/config";
 import sampleData from "./sample-data";
@@ -12,10 +12,14 @@ const prisma = new PrismaClient({
 });
 
 export async function main() {
+  await prisma.product.deleteMany();
+  await prisma.account.deleteMany();
+  await prisma.session.deleteMany();
+  await prisma.verificationToken.deleteMany();
+  await prisma.user.deleteMany();
+
   await prisma.product.createMany({ data: sampleData.products });
-  //   for (const u of sampleData) {
-  //     await prisma.user.create({ data: u });
-  //   }
+  await prisma.user.createMany({ data: sampleData.users });
 }
 
 main();
