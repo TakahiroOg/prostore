@@ -45,18 +45,18 @@ export const config = {
       },
     }),
   ],
-  callbacks: {
-    async session({ session, token, user, trigger }: any) {
-      // Set the user id from the token
-      session.user.id = token.sub;
+  //   callbacks: {
+  //     async session({ session, token, user, trigger }) {
+  //       // Set the user id from the token
+  //       session.user.id = token.sub;
 
-      // If there is an update, set the user name
-      if (trigger === "update") {
-        session.user.name = user.name;
-      }
-      return session;
-    },
-  },
+  //       // If there is an update, set the user name
+  //       if (trigger === "update") {
+  //         session.user.name = user.name;
+  //       }
+  //       return session;
+  //     },
+  //   },
 } satisfies NextAuthConfig;
 
 export const { handlers, auth, signIn, signOut } = NextAuth(config);
